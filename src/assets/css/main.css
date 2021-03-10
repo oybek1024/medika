@@ -1,0 +1,35 @@
+@import "montserrat.css";
+
+#app {
+  font-family: Montserrat, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.t_sm-selector {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  -webkit-appearance: none;
+}
+/* .min-content {
+  min-height: calc(100vh - 0px );
+}
+.t-head {
+  height: 200px;
+}
+.t-head {
+  height: 200px;
+} */
+/* #nav {
+  padding: 30px;
+}
+
+#nav a {
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+#nav a.router-link-exact-active {
+  color: #42b983;
+} */

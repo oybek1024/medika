@@ -1,0 +1,467 @@
+<template>
+    <div class= "text-tgreen bg-white min-h-tmminbody sm:min-h-tminbody p-5 sm:p-10 w-full flex flex-col items-center justify-center">
+        
+        <h1 class="font-bold w-full sm:w-8/12 mb-2 sm:mb-3 text-center">
+            Créer nouveau dossier
+        </h1>
+
+        <div class="w-full sm:w-10/12 md:w-10/12 xl:w-6/12 sm:py-2 sm:px-5">
+
+            <div class="grid grid-cols-12 gap-x-2 gap-y-3 items-center w-full">
+                <div :class="labelClass">N° Dossier</div>
+                <input :class="inputClass" placeholder="N° Dossier" @keyup.enter="addDossier" v-model="noDossier"/>
+                <div :class="vspacer"></div>
+
+                <div :class="labelClass">Date de naissance</div>
+                <input :class="inputClass" placeholder="jj/mm/aaaa" @keyup.enter="addDossier" v-model="birthdate"/>
+                <p :class="vspacer"></p>
+
+                <div :class="labelClass">Date de RDV</div>
+                <input :class="inputClass" placeholder="jj/mm/aaaa" @keyup.enter="addDossier" v-model="dateRDV"/>
+                <p :class="vspacer"></p>
+
+                <div :class="labelClass"></div>
+                <div :class="[selectTimeContainerClass]">
+                    <div class="w-5/12 relative">
+                        <select id="h-option-select" v-model="hour" :class="[selectTimeClass, 't_sm-selector']">
+                            <option v-for="h in hourOptions" :value="h.val" :key="'hour_' + h.val">
+                                {{ h.text }}
+                            </option>
+                        </select>
+                        <i :class="['feather icon-chevron-down flex items-center text-lg absolute right-2.5 inset-y-0']"></i>
+                    </div>
+                    <div class="w-5/12 relative">
+                        <select id="m-option-select" v-model="minute" :class="[selectTimeClass, 't_sm-selector']">
+                            <option v-for="m in minuteOptions" :value="m.val" :key="'minute_' + m.val">
+                                {{ m.text }}
+                            </option>
+                        </select>
+                        <i :class="['feather icon-chevron-down flex items-center text-lg absolute right-2.5 inset-y-0']"></i>
+                    </div>
+                </div> 
+                <p :class="vspacer"></p>
+                
+                <!-- select examen -->
+                <div :class="labelClass">Examen</div>
+                <div :class="[selectContainerClass, 'relative']">
+                    <vue-autosuggest
+                        :sectionConfigs="sectionConfigs"
+                        id="autosuggest"
+                        ref="autocomplete"
+                        v-model="query"
+                        :suggestions="filteredOptions"
+                        :inputProps="inputProps"
+                        :renderSuggestion="renderSuggestion"
+                        :getSuggestionValue="getSuggestionValue"/>
+                </div> 
+                <p :class="vspacer"></p>
+
+                <!-- select centre medika -->
+                <div :class="labelClass">Centre Medika</div>
+                <div :class="[selectContainerClass, 'relative']">
+                    <select id="examen-option-select" v-model="examenCentreId" :class="[selectClass, 't_sm-selector']">
+                        <option v-for="item in examenCentreOptions" :value="item._id" :key="item._id">
+                            {{ item.name }}
+                        </option>
+                    </select>
+                    <i :class="['feather icon-chevron-down flex items-center text-lg absolute right-2.5 inset-y-0']"></i>
+                </div>
+                <p :class="vspacer"></p>
+                
+            </div>
+
+            <div class="flex justify-center w-full">
+                <ul v-if="inputCheckerrors.length" class="w-8/12 mx-auto p-2 text-tdanger">
+                    <li v-for="(err, idx) in inputCheckerrors" :key="idx"><i class="feather icon-alert-triangle mr-1"/>{{ err }}</li>
+                </ul>
+                <p v-if="submitError" class="p-2 text-tdanger"><i class="feather icon-alert-triangle mr-1"/>{{submitError}}</p>
+                <p v-if="getDataError" class="p-2 text-tdanger"><i class="feather icon-alert-triangle mr-1"/>{{getDataError}}</p>
+            </div>
+            
+            <button class="mx-auto bg-tdarkblue font-bold text-white px-5 py-2 mt-3 sm:mt-5 hover:shadow-xl 
+                flex justify-around items-center" @click="addDossier">
+                <p v-if="loading" class="text-xl animate-spin feather icon-loader mr-2"></p>
+                <p>Créer dossier</p>
+            </button>
+
+            <p class="text-center mt-5 cursor-pointer underline" @click="backToDash">
+                Revenir à l'espace Secretaire 
+            </p>
+
+        </div>
+
+    </div>
+</template>
+
+
+<script>
+import { mapState } from 'vuex-alt';
+import { VueAutosuggest } from 'vue-autosuggest';
+
+const groupBy = key => array =>
+  array.reduce((objectsByKeyValue, obj) => {
+    const value = obj[key];
+    objectsByKeyValue[value] = (objectsByKeyValue[value] || []).concat(obj);
+    return objectsByKeyValue;
+  }, {});
+
+export default {
+    name: "DossierNew",
+    data() {
+        return {
+            labelClass: `
+                col-span-3 sm:col-span-2 md:col-span-3
+                text-sm xl:text-base 
+                text-right`,
+
+            selectContainerClass: `
+                col-span-8 
+                sm:col-span-8 
+                md:col-span-6
+                `,
+
+            selectClass: `
+                w-full
+                border border-gray-300 
+                px-2 py-2 sm:py-3 rounded-md 
+                hover:shadow-md 
+                text-sm xl:text-base`,
+
+            inputClass: `
+                col-span-8 
+                sm:col-span-8 
+                md:col-span-6 
+                border border-gray-300 hover:border-blue-200
+                px-2 py-2 sm:py-3 rounded-md 
+                hover:shadow-md 
+                text-sm xl:text-base`,
+
+            vspacer: 'col-span-1 sm:col-span-2 md:col-span-2',
+
+            selectInputClass: `
+                col-span-8 
+                sm:col-span-8 
+                md:col-span-6 
+                border px-2 py-2 sm:py-3
+                hover:shadow-md hover:border-blue-200
+                border-gray-300 rounded-md 
+                text-sm xl:text-base`,
+
+            inputDateClass: `
+                col-span-8 
+                sm:col-span-8 
+                md:col-span-6 
+                border border-gray-300 hover:border-blue-200
+                px-2 py-1 sm:py-2 rounded-md
+                hover:shadow-md
+                text-xs xl:text-base`,
+
+            selectTimeContainerClass: `
+                col-span-8 
+                sm:col-span-8 
+                md:col-span-6 
+                text-sm xl:text-base
+                flex justify-around`,
+
+            selectTimeClass: `
+                w-full
+                border border-gray-300 
+                px-5 py-1 sm:py-2 rounded-md
+                hover:shadow-md`,
+
+            inputDateRDVClass: `
+                col-span-8 
+                sm:col-span-8 
+                md:col-span-6 
+                border px-2 py-1 sm:py-2
+                hover:shadow-md hover:border-blue-200
+                border-gray-300 rounded-md 
+                text-xs xl:text-base`,
+
+            noDossier: '',
+            minuteRDV: 0,
+            hourRDV: 12,
+
+            dateRDV: '',
+
+            birthdate: '',
+            
+            locale: { lang: 'fr', weekDays: ['L', 'M', 'M', 'J', 'V', 'S', 'D'] },
+            examenCentreId: '',
+            examenId: '',
+
+            examenOptions: [],
+            examenCentreOptions: [],
+
+            loading: '',
+            submitError: '', 
+            inputCheckerrors: [],
+            getDataError: '',
+
+            hour: '',
+            minute: '',
+            hourOptions: [],
+            minuteOptions: [],
+
+            query: "",
+            inputProps: {
+                id: "search-input",
+                placeholder: "type examen ?",
+                class: `w-full
+                    border border-gray-300 
+                    px-2 py-2 sm:py-3 rounded-md 
+                    hover:shadow-md 
+                    text-sm xl:text-base`,
+                name: "search-input"
+            }
+        }
+    },
+    created() {
+         this.hourOptions = [{ val: '', text: "heure" }];
+        for (let i = 7; i < 23; i++) {
+            this.hourOptions.push({ val: "" + (i < 10 ? ("0" + i) : i), text: `${i} h` });
+        }
+        this.minuteOptions = [{ val: '', text: "minute" }];
+        for (let i = 0; i < 60; i += 5) {
+            this.minuteOptions.push({ val: (i < 10 ? ("0" + i) : i), text: `${i} '` });
+        }
+        let self = this;
+        self.$myAuthAxios({
+                url: `/examen`,
+                method: "get"
+            })
+            .then(res => {
+                let examens = ((res.data || {}).data || {}).examens;
+                let status = (res.data || {}).status;
+                if (status === "success" && examens && examens.length) {
+                    self.examenOptions = examens;
+                }
+            })
+            .catch((error) => {
+                self.getDataError = error;
+            });
+
+        self.$myAuthAxios({
+                url: `/examencentre`,
+                method: "get"
+            })
+            .then(res => {
+                let examencentres = ((res.data || {}).data || {}).examencentres;
+                let status = (res.data || {}).status;
+                if (status === "success" && examencentres) {
+                    let arr  = [{ _id: '',  name: "centre d'examen ?" }];
+                    self.examenCentreOptions = arr.concat(examencentres);
+                }
+            })
+            .catch((error) => {
+                self.getDataError = error;
+            });
+    },
+    components: {
+        VueAutosuggest
+    },
+    computed: {
+        ...mapState({
+            pagingParam: (state) => state.secretary.pagingParam
+        }),
+        sectionConfigs() {
+            let self = this;
+            let configObj = {};
+            if (this.filteredOptionsAll && this.filteredOptionsAll.length) {
+                this.filteredOptionsAll.forEach(e => {
+                    configObj[e.name] = {
+                        label: e.name,
+                        onSelected: selected => {
+                            if (self.examenOptions && selected && selected.item) {
+                                let selectExamen = self.examenOptions.filter(e => e.code == selected.item && e.group == selected.name)
+                                self.examenId = selectExamen[0]._id;
+                            }
+                        }
+                    }
+                })
+            }
+            return configObj;
+        },
+        filteredOptionsAll() {
+            let self = this;
+            let out = [];
+            let groupedObj = groupBy('group')(self.examenOptions);
+            Object.keys(groupedObj).forEach(g => {
+                if (groupedObj[g] && groupedObj[g].length) {
+                    out.push(
+                        {
+                            name: g,
+                            data: groupedObj[g].map(o => o.code)
+                        }
+                    );
+                }
+            });
+            return out;
+        },
+        filteredOptions() {
+            let self = this;
+            const query = this.query;
+            let out = [];
+            let filteredExamenOptions = self.examenOptions.filter(
+                e => {
+                    let check = true;
+                    let queryArr = query.split(' ');
+                    queryArr.forEach(q => {
+                        check = check &&  
+                        (
+                            e.code.toLowerCase().indexOf(q.toLowerCase()) > -1 || 
+                            e.group.toLowerCase().indexOf(q.toLowerCase()) > -1
+                        )
+                    })
+                    return check;
+                }
+            );
+            let groupedObj = groupBy('group')(filteredExamenOptions);
+            Object.keys(groupedObj).forEach(g => {
+                if (groupedObj[g] && groupedObj[g].length) {
+                    out.push(
+                        {
+                            name: g,
+                            data: groupedObj[g].map(o => o.code)
+                        }
+                    );
+                }
+            });
+            return out;
+        }
+    },
+    methods: {
+        renderSuggestion(suggestion) {
+            return `${suggestion.name} - ${suggestion.item}`;
+        },
+        getSuggestionValue(suggestion) {
+            return `${suggestion.name} - ${suggestion.item}`;
+        },
+        backToDash() {
+            this.$router.push({ name: 'secretary-dash', query: { page: this.pagingParam || 1 } });
+        },
+        checkForm() {
+            let self = this;
+            this.inputCheckerrors = [];
+            this.submitError = '';
+            if (!this.noDossier) {
+                this.inputCheckerrors.push(this.$error.is_empty('N° Dossier'));
+            } else if (this.noDossier && this.noDossier.length > 50) {
+                this.inputCheckerrors.push(this.$error.max_length(50));
+            }
+            if (!this.dateRDV) {
+                this.inputCheckerrors.push(self.$error.is_empty('Date de rdv'));
+            } else if (!this.$checkDateRDV(this.dateRDV)) {
+                this.inputCheckerrors.push(self.$error.wrong_date_format('Date de rdv'));
+            }
+            if (!this.birthdate) {
+                this.inputCheckerrors.push(self.$error.is_empty('Date de naissance'));
+            } else if (!this.$checkDate(this.birthdate)) {
+                this.errors.push(self.$error.wrong_format('Date de naissance'));
+            }
+            if (!this.examenId) {
+                this.inputCheckerrors.push(self.$error.is_empty('Examen'));
+            }
+            if (!this.examenCentreId) {
+                this.inputCheckerrors.push(self.$error.is_empty('Examen centre'));
+            }
+            return !this.inputCheckerrors.length;
+        },
+        addDossier() {
+            var self = this;
+            if (this.checkForm()) {
+                this.loading = true;
+                let dateRDVArr = self.dateRDV.split('/').reverse().join('/');
+                this.$myAuthAxios({
+                    url: `/dossier`,
+                    method: 'POST',
+                    data: {
+                        noDossier: self.noDossier,
+                        dateRDV: `${dateRDVArr}:${self.hour}:${self.minute}`, /*to yyyy/mm/dd:hh:mn*/
+                        birthdate: self.birthdate,
+                        examenCentreId: self.examenCentreId,
+                        examenId: self.examenId,
+                        loginPrefixLink: `${window.location.origin}/${process.env.VUE_APP_DOSSIER_ROUTE}/login`
+                    }
+                })
+                .then(res => {
+                    if (res.data) {
+                        // let dossier = ((res.data || {} ).data || {} ).dossier || {}
+                        self.$router.push({ name: 'secretary-dash' });
+                    }
+                })
+                .catch(err => {
+                    if(err.response && err.response.data && err.response.data.message) {
+                        self.submitError = err.response.data.message;
+                    } else {
+                        self.submitError = err.data.message;
+                    }
+                }).then(() => {
+                    self.loading = false;
+                })
+            }
+        }
+    },
+}
+</script>
+
+<style>
+  .autosuggest__results {
+    z-index: 10;
+    width: 100%;
+    max-height: 300px;
+    overflow-y: scroll;
+    position: absolute;
+    border: 1px solid #e0e0e0;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    background: white;
+    padding: 0px;
+    margin: 0px;
+    text-align: left;
+    font-weight: 300;
+    font-size: 12px;
+    box-shadow: 7px 13px 16px 0px rgba(0, 0, 0, 0.2);
+    padding-bottom: 30px;
+    @media (max-width:768px) {
+      font-size: 11px;
+    }
+  }
+  .autosuggest__results ul {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+  }
+  .autosuggest__results .autosuggest__results-item {
+    cursor: pointer;
+    padding: 5px 10px 5px 20px;
+    @media (max-width:768px) {
+      padding: 5px 5px 5px 15px;
+    }
+  }
+  #autosuggest ul:nth-child(1) > .autosuggest__results_title {
+    border-top: none;
+  }
+  #autosuggest .custom {
+    border-radius: 36px;
+  }
+  .autosuggest__results .autosuggest__results-before {
+    text-align: left;
+    font-weight: 700;
+    color: gray;
+    font-size: 14px;
+    padding: 15px 15px 5px 15px;
+    border-bottom: 1px solid lightgray;
+    @media (max-width:768px) {
+      font-size: 12px;
+      padding: 10px 10px 5px 10px;
+    }
+  }
+  .autosuggest__results .autosuggest__results-item:active,
+  .autosuggest__results .autosuggest__results-item:hover,
+  .autosuggest__results .autosuggest__results-item:focus,
+  .autosuggest__results
+    .autosuggest__results-item.autosuggest__results-item--highlighted {
+    background-color: #7cc2e2;
+  }
+</style>
