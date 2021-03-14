@@ -1,5 +1,5 @@
 
-import { 
+import {
 	// getMyDossierHook,
 	// requireDossierAuth,
 	requireDossierAuthRegistered,
@@ -10,7 +10,7 @@ import {
 export default [
     {
 		path: '/' + process.env.VUE_APP_DOSSIER_ROUTE,
-        component: () => import('Views/layout/DossierLayout.vue'),
+        component: () => import('Views/page/index'), // component: () => import('Views/layout/DossierLayout.vue'),
         children: [
 			{
 				path: '',
