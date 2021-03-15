@@ -4,7 +4,7 @@
       <div class="container-fluid">
         <div class="container">
           <div class="row">
-            <div class="col-4">
+            <div class="col-3 p-0">
               <div class="logo_brand">
                 <div class="logo_top">
                   <p>vos meilleures</p>
@@ -22,10 +22,10 @@
                 </div>
               </div>
             </div>
-            <div class="col-8">
+            <div class="col-7">
               <div class="row ">
-                <div class="col-12">
-                  <div class="menu mt-4">
+                <div class="col-12 ">
+                  <div class="menu mr-4 mt-4">
                     <ul class="menu_list">
                       <li class="menu_list_item">
                         <a href="#">Mon Guide</a>
@@ -138,7 +138,7 @@
     <footer>
       <div class="container">
         <div class="row">
-          <div class="col-4">
+          <div class="col-3">
             <div class="logo_brand">
               <div class="logo_top">
                 <p>vos meilleures</p>
@@ -155,10 +155,10 @@
                 <span>S</span>
               </div>
             </div>
-            <div class="socials">
-              <a href="#"><img src="" alt="facebook_icon"></a>
-              <a href="#"><img src="" alt="you-tube"></a>
-              <a href="#"><img src="" alt="twitter_icon"></a>
+            <div class="socials d-flex align-items-center ">
+              <a href="#"><img class="img-fluid mr-3" width="45" src="./assets/img/facebook.svg" alt="facebook_icon"></a>
+              <a href="#"><img  class="img-fluid mr-4" width="30" src="./assets/img/you-tube.svg" alt="you-tube"></a>
+              <a href="#"><img class="img-fluid" width="30" src="./assets/img/twitter.svg" alt="twitter_icon"></a>
             </div>
           </div>
           <div class="col-3">
@@ -183,7 +183,7 @@
               <li class="our_servises_list_item">FAQ</li>
             </ul>
           </div>
-          <div class="col-2">
+          <div class="col-3">
             <h4 class="our_servises">Vos servises</h4>
             <ul class="our_servises_list">
               <li class="our_servises_list_item">A propos</li>
