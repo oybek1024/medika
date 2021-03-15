@@ -1,0 +1,24 @@
+body{
+    background-color: #f1f1f1;
+    @font-face {
+        font-family: 'Myriad Pro Regular';
+        font-style: normal;
+        font-weight: normal;
+        src: local('Myriad Pro Regular'), url('MYRIADPRO-REGULAR.woff') format('woff');
+    }
+}
+a{
+    text-decoration: none;
+    color: #000;
+    &:hover{
+        text-decoration: none;
+        color: #117979;
+    }
+}
+li,ul{
+    list-style: none;
+}
+button{
+    outline: none;
+    border: none;
+}

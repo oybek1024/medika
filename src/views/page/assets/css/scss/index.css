@@ -1,0 +1,397 @@
+header {
+  background-color: #fff;
+  margin-bottom: 100px;
+}
+
+header .logo_brand {
+  margin-bottom: 10px;
+}
+
+header .logo_brand .logo_top p {
+  font-size: 24px;
+  color: #117979;
+  font-weight: 900;
+  text-transform: uppercase;
+  margin: 0;
+  margin-bottom: -15px;
+  letter-spacing: 2.5px;
+}
+
+@font-face {
+  header .logo_brand .logo_top p {
+    font-family: 'Myriad Pro Regular';
+    font-style: normal;
+    font-weight: normal;
+    src: local("Myriad Pro Regular"), url("MYRIADPRO-REGULAR.woff") format("woff");
+  }
+}
+
+header .logo_brand .logo_bottom span {
+  font-size: 32px;
+  color: #117979;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+@font-face {
+  header .logo_brand .logo_bottom span {
+    font-family: 'Myriad Pro Regular';
+    font-style: normal;
+    font-weight: normal;
+    src: local("Myriad Pro Regular"), url("MYRIADPRO-REGULAR.woff") format("woff");
+  }
+}
+
+header .logo_brand .logo_bottom span img {
+  width: 32px;
+}
+
+header .menu ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+
+header .menu ul li {
+  font-size: 18px;
+  color: #000;
+  font-weight: 400;
+  margin-left: 45px;
+}
+
+@font-face {
+  header .menu ul li {
+    font-family: 'Myriad Pro Regular';
+    font-style: normal;
+    font-weight: normal;
+    src: local("Myriad Pro Regular"), url("MYRIADPRO-REGULAR.woff") format("woff");
+  }
+}
+
+header .menu ul li a:hover {
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+
+header .menu ul li .sing_in_button {
+  font-weight: 500;
+  color: #fff;
+  background-color: #42c6c6;
+  padding: 8px 20px;
+}
+
+header .accaunt {
+  position: absolute;
+  left: 1600px;
+  top: 0;
+}
+
+header .accaunt .phone_add {
+  background-color: #af0037;
+  font-size: 18px;
+  color: #fff;
+  font-weight: 500;
+  padding-bottom: 15px;
+  width: 250px;
+}
+
+header .accaunt .phone_add p {
+  margin: 0;
+}
+
+body {
+  background-color: #f1f1f1;
+  max-width: 1920px;
+  width: 1920px;
+}
+
+@font-face {
+  body {
+    font-family: 'Myriad Pro Regular';
+    font-style: normal;
+    font-weight: normal;
+    src: local("Myriad Pro Regular"), url("MYRIADPRO-REGULAR.woff") format("woff");
+  }
+}
+
+a {
+  text-decoration: none;
+  color: #000;
+}
+
+a:hover {
+  text-decoration: none;
+  color: #117979;
+}
+
+li, ul {
+  list-style: none;
+}
+
+button {
+  outline: none;
+  border: none;
+}
+
+.heading_wrap .heading_contex {
+  font-size: 32px;
+  color: #117979;
+  font-weight: 900;
+  text-transform: lowercase;
+  letter-spacing: 1px;
+}
+
+@font-face {
+  .heading_wrap .heading_contex {
+    font-family: 'Myriad Pro Regular';
+    font-style: normal;
+    font-weight: normal;
+    src: local("Myriad Pro Regular"), url("MYRIADPRO-REGULAR.woff") format("woff");
+  }
+}
+
+.heading_wrap .paragraph_contex {
+  font-size: 18px;
+  color: #117979;
+  font-weight: 500;
+  letter-spacing: 1px;
+  margin-bottom: 50px;
+}
+
+@font-face {
+  .heading_wrap .paragraph_contex {
+    font-family: 'Myriad Pro Regular';
+    font-style: normal;
+    font-weight: normal;
+    src: local("Myriad Pro Regular"), url("MYRIADPRO-REGULAR.woff") format("woff");
+  }
+}
+
+.accardion_item .accardion_img {
+  background-color: #117979;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  padding: 20px 0px;
+}
+
+.accardion_item .accardion_img .accardion_logo {
+  height: 80px;
+}
+
+.accardion_item .accardion_text {
+  background-color: #fff;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding: 30px;
+}
+
+.accardion_item .accardion_text p {
+  font-size: 26px;
+  color: #117979;
+  font-weight: 500;
+  letter-spacing: 1px;
+  margin: 0;
+}
+
+.accardion_item .accardion_text span {
+  font-size: 36px;
+  color: #117979;
+  font-weight: 900;
+  margin-right: 20px;
+}
+
+.accardion_main {
+  margin-top: 20px;
+}
+
+.accardion_main .accardion_img {
+  background-color: #42c6c6;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  padding: 20px 0px;
+}
+
+.accardion_main .accardion_img .accardion_logo {
+  height: 80px;
+}
+
+.accardion_main .accardion_form {
+  background-color: #117979;
+  background-image: url(../../assets/img/gaz-icon.png);
+  background-repeat: no-repeat;
+  background-size: 30%;
+  background-position-y: 300px;
+  background-position-x: 670px;
+  background-blend-mode: soft-light;
+  padding: 30px;
+  color: #fff;
+}
+
+.accardion_main .accardion_form .accardion_text {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.accardion_main .accardion_form .accardion_text p {
+  font-size: 26px;
+  color: #fff;
+  font-weight: 500;
+  letter-spacing: 1px;
+  margin: 0;
+}
+
+.accardion_main .accardion_form .accardion_text span {
+  font-size: 24px;
+  color: #fff;
+  font-weight: 900;
+  margin-right: 20px;
+}
+
+.accardion_main .accardion_form form label {
+  font-size: 18px;
+}
+
+.accardion_main .accardion_form form select {
+  width: 100%;
+  margin-bottom: 20px;
+  padding: 10px;
+}
+
+.accardion_main .accardion_form form input {
+  width: 100%;
+  margin-bottom: 20px;
+  padding: 10px;
+}
+
+.accardion_main .accardion_form form .custom-file {
+  width: 100%;
+  margin-bottom: 20px;
+  padding: 10px;
+}
+
+.accardion_main .accardion_form form textarea {
+  width: 100%;
+  padding: 10px;
+}
+
+.accardion_main .accardion_form .saves {
+  padding-left: 80px;
+}
+
+.accardion_main .accardion_form .saves .saved_list {
+  font-size: 24px;
+  margin-top: 20px;
+  margin-bottom: 30px;
+  text-transform: uppercase;
+}
+
+.accardion_main .accardion_form .saves button {
+  outline: none;
+  border: none;
+  padding: 10px 15px;
+  font-size: 24px;
+  color: #117979;
+  font-weight: 500;
+  position: relative;
+  text-transform: uppercase;
+  top: 20%;
+  background-color: #fff;
+  left: 100px;
+}
+
+.suivant {
+  padding: 10px 30px;
+  background-color: #42c6c6;
+  font-size: 24px;
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: 600;
+  position: relative;
+  left: 83%;
+  letter-spacing: 2px;
+  margin-top: 50px;
+  margin-bottom: 200px;
+}
+
+footer {
+  background-color: #fff;
+  background-image: url(../../assets/img/chuchqacha.svg);
+}
+
+footer .logo_brand {
+  margin-bottom: 10px;
+}
+
+footer .logo_brand .logo_top p {
+  font-size: 24px;
+  color: #117979;
+  font-weight: 900;
+  text-transform: uppercase;
+  margin: 0;
+  margin-bottom: -15px;
+  letter-spacing: 2.5px;
+}
+
+footer .logo_brand .logo_bottom span {
+  font-size: 32px;
+  color: #117979;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+footer .logo_brand .logo_bottom span img {
+  width: 32px;
+}
+
+footer .our_servises {
+  margin-top: 100px;
+  font-size: 24px;
+  color: #42c6c6;
+}
+
+footer .our_servises_list {
+  padding: 15px;
+  margin-top: 10px;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+footer .our_servises_list .our_servises_list_item {
+  list-style: disc;
+}
+/*# sourceMappingURL=index.css.map */

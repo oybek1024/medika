@@ -1,0 +1,88 @@
+header{
+    background-color: #fff;
+    margin-bottom: 100px;
+    .logo_brand{
+        margin-bottom: 10px;
+        .logo_top{
+            p{
+                @font-face {
+                    font-family: 'Myriad Pro Regular';
+                    font-style: normal;
+                    font-weight: normal;
+                    src: local('Myriad Pro Regular'), url('MYRIADPRO-REGULAR.woff') format('woff');
+                }
+                font-size: 24px;
+                color: #117979;
+                font-weight: 900;
+                text-transform:uppercase;
+                margin: 0;
+                margin-bottom: -15px;
+                letter-spacing: 2.5px;
+            }
+        }
+        .logo_bottom{
+            span{
+                @font-face {
+                    font-family: 'Myriad Pro Regular';
+                    font-style: normal;
+                    font-weight: normal;
+                    src: local('Myriad Pro Regular'), url('MYRIADPRO-REGULAR.woff') format('woff');
+                }
+                font-size: 32px;
+                color: #117979;
+                font-weight: 900;
+                text-transform:uppercase;
+                img{
+                    width: 32px;
+                }
+            }
+        }
+    }
+    .menu{
+        ul {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            li{
+                font-size: 18px;
+                color: #000;
+                font-weight: 400;
+                margin-left: 45px;
+                @font-face {
+                    font-family: 'Myriad Pro Regular';
+                    font-style: normal;
+                    font-weight: normal;
+                    src: local('Myriad Pro Regular'), url('MYRIADPRO-REGULAR.woff') format('woff');
+                }
+                a{
+                    &:hover{
+                        transition: all 0.3s ease;
+                    }
+                }
+                .sing_in_button{
+                    font-weight: 500;
+                    color: #fff;
+                    background-color: #42c6c6;
+                    padding: 8px 20px;
+                }
+            }
+        }
+    }
+    .accaunt{
+        position: absolute;
+        left: 1600px;
+        top: 0;
+        .phone_add{
+            background-color: #af0037;
+            font-size: 18px;
+            color: #fff;
+            font-weight: 500;
+            padding-bottom: 15px;
+            width: 250px;
+            p{
+                margin: 0;
+            }
+        }
+    }
+    
+}
