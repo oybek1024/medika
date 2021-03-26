@@ -102,7 +102,7 @@
                         <option value="SuperGas">SuperGas</option>
                       </select>
                       <label for="summ">Mes depenses mensuelles:</label><br>
-                      <input type="text" name="summ" placeholder="150 &euro; / mois">
+                      <input type="text" name="summ" placeholder="150 &euro;/ mois">
                       <label for="upload_file">J'upload mes documents:</label>
                       <div class="custom-file">
                         <input type="file" class="custom-file-input" id="customFile">
